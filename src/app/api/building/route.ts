@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
 
+export const runtime = 'edge';
+
 // 건축HUB 건축물대장 서비스 엔드포인트
 const API_URL = 'https://apis.data.go.kr/1613000/BldRgstHubService/getBrTitleInfo';
 

@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
 
+export const runtime = 'edge';
+
 const API_URL = 'http://apis.data.go.kr/1613000/LndpSvc/getLndpInfo';
 
 export async function GET(request: Request) {
