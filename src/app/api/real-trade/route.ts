@@ -55,7 +55,7 @@ async function fetchTradeData(url: string, params: Record<string, string>): Prom
     return JSON.parse(rawData);
 }
 
-// 최근 6개월 거래 데이터 조회
+// 최근 12개월 거래 데이터 조회
 async function fetchRecentTrades(
     lawdCd: string,
     apiUrl: string,
@@ -64,8 +64,8 @@ async function fetchRecentTrades(
 ): Promise<any[]> {
     const now = new Date();
 
-    // 최근 6개월 날짜 생성
-    const months = Array.from({ length: 6 }, (_, i) => {
+    // 최근 12개월 날짜 생성
+    const months = Array.from({ length: 12 }, (_, i) => {
         const targetDate = new Date(now.getFullYear(), now.getMonth() - i, 1);
         return `${targetDate.getFullYear()}${String(targetDate.getMonth() + 1).padStart(2, '0')}`;
     });

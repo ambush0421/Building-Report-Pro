@@ -63,5 +63,7 @@
     "startedAt": "2026-02-10T13:01:25.087Z",
     "onboardingCompleted": true,
     "lastActivity": "2026-02-10T13:01:25.087Z"
-  }
+  },
+  "_snapshotTimestamp": "2026-02-10T15:19:52.344Z",
+  "_reason": "pre-compress"
 }
