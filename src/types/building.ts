@@ -1,46 +1,42 @@
-export interface BuildingReport {
-  // 기본 정보
-  bldNm: string;                // 건물명
-  platAddr: string;             // 대지위치
-  
-  // 핵심 지표
-  vlrtBldRgstYn: 'Y' | 'N';     // 위반건축물여부
-  platArea: number;             // 대지면적 (m2)
-  totArea: number;              // 연면적 (m2)
-  bcRat: number;                // 건폐율 (%)
-  vlrat: number;                // 용적률 (%)
-  
-  // 건축 상세
-  mainPurpsCdNm: string;        // 주용도
-  strctCdNm: string;            // 구조
-  indrMechUtcnt: number;        // 주차장 정보
-  
-  // 추가 정보
-  useAprvDay: string;           // 사용승인일
-  grndFlrCnt: number;           // 지상층수
-  ugndFlrCnt: number;           // 지하층수
-
-  // v2 확장 데이터
-  landInfo?: LandInfo;
-  priceHistory?: PriceHistory[];
+/**
+ * 건축물대장 총괄표제부에서 가져오는 데이터
+ */
+export interface BuildingSummary {
+  bldNm: string; // 건물명
+  platPlc: string; // 대지위치 (지번주소)
+  newPlatPlc: string; // 새주소 (도로명주소)
+  useAprDay: string; // 사용승인일 (YYYYMMDD)
+  mainPurpsCdNm: string; // 주용도명
+  etcPurps: string; // 기타용도
+  strctCdNm: string; // 구조명
+  grndFlrCnt: number; // 지상층수
+  ugrndFlrCnt: number; // 지하층수
+  totArea: number; // 연면적 (㎡)
+  archArea: number; // 건축면적 (㎡)
+  platArea: number; // 대지면적 (㎡)
+  bcRat: number; // 건폐율 (%)
+  vlRat: number; // 용적률 (%)
+  totPkngCnt: number; // 총주차대수
+  rideUseElvtCnt: number; // 승객용 승강기 수
+  emgenUseElvtCnt: number; // 비상용 승강기 수
+  hhldCnt: number; // 세대수
+  fmlyCnt: number; // 가구수
+  engyEffcGradCd: string; // 에너지효율등급
 }
 
-export interface LandInfo {
-  lndpclAr: number;             // 대지면적
-  lndMsclCdNm: string;          // 지목
-  pannPrc: number;              // 공시지가
+/**
+ * 건물 나이 분석
+ */
+export interface BuildingAge {
+  years: number; // 경과 년수
+  condition: 'new' | 'good' | 'aging' | 'old'; // 상태 분류
+  conditionLabel: string; // "신축", "양호" 등
 }
 
-export interface PriceHistory {
-  year: string;
-  price: number;
-}
-
-export interface AddressInfo {
-  sigunguCd: string;
-  bjdongCd: string;
-  platGbCd: string;
-  bun: string;
-  ji: string;
-  address: string;
+/**
+ * 통합 건물 정보
+ */
+export interface BuildingInfo extends BuildingSummary {
+  buildingAge: BuildingAge;
+  totalElevatorCnt: number; // rideUseElvtCnt + emgenUseElvtCnt
 }

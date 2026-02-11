@@ -2,72 +2,138 @@
   "project": "building-report-pro",
   "level": "Dynamic",
   "features": {
+    "type-definitions": {
+      "phase": "Report",
+      "status": "Archived",
+      "updatedAt": "2026-02-11T07:35:00Z",
+      "history": [
+        { "phase": "Plan", "action": "Created plan for core TypeScript type definitions", "timestamp": "2026-02-11T07:25:00Z" },
+        { "phase": "Report", "action": "Completed implementation and archived", "timestamp": "2026-02-11T07:35:00Z" }
+      ]
+    },
+    "project-initialization-vite": {
+      "phase": "Plan",
+      "status": "Pending",
+      "updatedAt": "2026-02-11T07:20:00Z",
+      "history": [
+        { "phase": "Plan", "action": "Created detailed Vite re-initialization plan", "timestamp": "2026-02-11T07:20:00Z" }
+      ]
+    },
+    "system-initialization": {
+      "phase": "Plan",
+      "status": "Pending",
+      "updatedAt": "2026-02-11T07:15:00Z",
+      "history": [
+        { "phase": "Plan", "action": "Created GEMINI.md and initialization plan", "timestamp": "2026-02-11T07:15:00Z" }
+      ]
+    },
     "building-report": {
       "phase": "Report",
-      "status": "Completed",
-      "updatedAt": "2026-02-10T09:10:00Z",
+      "status": "Archived",
+      "updatedAt": "2026-02-10T18:10:00Z",
       "history": [
         { "phase": "Plan", "action": "Created plan document", "timestamp": "2026-02-10T00:00:00Z" },
         { "phase": "Design", "action": "Created design document", "timestamp": "2026-02-10T00:00:00Z" },
         { "phase": "Do", "action": "Started implementation", "timestamp": "2026-02-10T00:00:00Z" },
-        { "phase": "Analyze", "action": "Performed gap analysis (Match Rate 95%)", "timestamp": "2026-02-10T09:10:00Z" }
+        { "phase": "Analyze", "action": "Performed gap analysis (Match Rate 95%)", "timestamp": "2026-02-10T09:10:00Z" },
+        { "phase": "Archive", "action": "Archived documents to docs/05-archive", "timestamp": "2026-02-10T18:10:00Z" }
       ]
     },
     "building-api-report": {
       "phase": "Report",
-      "status": "Completed",
-      "updatedAt": "2026-02-10T00:00:00Z",
+      "status": "Archived",
+      "updatedAt": "2026-02-10T18:10:00Z",
       "history": [
         { "phase": "Plan", "action": "Updated plan document based on user specific requirements", "timestamp": "2026-02-10T00:00:00Z" },
         { "phase": "Design", "action": "Updated design document to match Next.js/Tailwind stack", "timestamp": "2026-02-10T00:00:00Z" },
         { "phase": "Do", "action": "Completed implementation of API proxy, Report View, and Main Page", "timestamp": "2026-02-10T00:00:00Z" },
         { "phase": "Analyze", "action": "Performed gap analysis (Match Rate 98%)", "timestamp": "2026-02-10T00:00:00Z" },
-        { "phase": "Report", "action": "Generated final completion report", "timestamp": "2026-02-10T00:00:00Z" }
+        { "phase": "Report", "action": "Generated final completion report", "timestamp": "2026-02-10T00:00:00Z" },
+        { "phase": "Archive", "action": "Archived documents to docs/05-archive", "timestamp": "2026-02-10T18:10:00Z" }
       ]
     },
     "building-report-v2": {
       "phase": "Report",
-      "status": "Completed",
-      "updatedAt": "2026-02-10T00:00:00Z",
+      "status": "Archived",
+      "updatedAt": "2026-02-10T18:10:00Z",
       "history": [
         { "phase": "Plan", "action": "Initiated v2 plan based on feedback (Act phase)", "timestamp": "2026-02-10T00:00:00Z" },
         { "phase": "Design", "action": "Designed Supabase integration and multi-API merging architecture", "timestamp": "2026-02-10T00:00:00Z" },
         { "phase": "Do", "action": "Completed implementation of Land/Price APIs and Price History Chart", "timestamp": "2026-02-10T00:00:00Z" },
         { "phase": "Analyze", "action": "Performed gap analysis (Match Rate 85%)", "timestamp": "2026-02-10T00:00:00Z" },
         { "phase": "Iterate", "action": "Completed implementation of Supabase Auth and Cloud Storage UI", "timestamp": "2026-02-10T00:00:00Z" },
-        { "phase": "Report", "action": "Generated final completion report for v2", "timestamp": "2026-02-10T00:00:00Z" }
+        { "phase": "Report", "action": "Generated final completion report for v2", "timestamp": "2026-02-10T00:00:00Z" },
+        { "phase": "Archive", "action": "Archived documents to docs/05-archive", "timestamp": "2026-02-10T18:10:00Z" }
       ]
     },
     "dashboard": {
       "phase": "Report",
-      "status": "Completed",
-      "updatedAt": "2026-02-10T10:00:00Z",
+      "status": "Archived",
+      "updatedAt": "2026-02-10T18:10:00Z",
       "history": [
         { "phase": "Plan", "action": "Created dashboard plan document", "timestamp": "2026-02-10T00:00:00Z" },
         { "phase": "Design", "action": "Created dashboard design document", "timestamp": "2026-02-10T00:00:00Z" },
         { "phase": "Do", "action": "Completed implementation of dashboard and detail pages", "timestamp": "2026-02-10T09:30:00Z" },
-        { "phase": "Analyze", "action": "Performed gap analysis (Match Rate 98%)", "timestamp": "2026-02-10T10:00:00Z" }
+        { "phase": "Analyze", "action": "Performed gap analysis (Match Rate 98%)", "timestamp": "2026-02-10T10:00:00Z" },
+        { "phase": "Archive", "action": "Archived documents to docs/05-archive", "timestamp": "2026-02-10T18:10:00Z" }
       ]
     },
     "cloudflare-deployment-fix": {
       "phase": "Report",
-      "status": "Completed",
-      "updatedAt": "2026-02-10T17:30:00Z",
+      "status": "Archived",
+      "updatedAt": "2026-02-10T18:10:00Z",
       "history": [
         { "phase": "Plan", "action": "Identified Cloudflare deployment failure due to nodejs_compat flag", "timestamp": "2026-02-10T17:00:00Z" },
         { "phase": "Do", "action": "Created wrangler.toml with nodejs_compat flag and verified build", "timestamp": "2026-02-10T17:15:00Z" },
-        { "phase": "Report", "action": "Generated completion report", "timestamp": "2026-02-10T17:30:00Z" }
+        { "phase": "Report", "action": "Generated completion report", "timestamp": "2026-02-10T17:30:00Z" },
+        { "phase": "Archive", "action": "Archived documents to docs/05-archive", "timestamp": "2026-02-10T18:10:00Z" }
       ]
     },
     "ui-refinement": {
       "phase": "Report",
-      "status": "Completed",
-      "updatedAt": "2026-02-10T18:00:00Z",
+      "status": "Archived",
+      "updatedAt": "2026-02-10T18:10:00Z",
       "history": [
         { "phase": "Plan", "action": "Identified UI refinement needs and B&W theme", "timestamp": "2026-02-10T17:40:00Z" },
         { "phase": "Design", "action": "Created B&W design system spec", "timestamp": "2026-02-10T17:42:00Z" },
         { "phase": "Do", "action": "Implemented 'The Black Table' design system and terminology mapping", "timestamp": "2026-02-10T17:55:00Z" },
-        { "phase": "Analyze", "action": "Performed gap analysis (Match Rate 100%)", "timestamp": "2026-02-10T18:00:00Z" }
+        { "phase": "Analyze", "action": "Performed gap analysis (Match Rate 100%)", "timestamp": "2026-02-10T18:00:00Z" },
+        { "phase": "Archive", "action": "Archived documents to docs/05-archive", "timestamp": "2026-02-10T18:10:00Z" }
+      ]
+    },
+    "building-report-v4": {
+      "phase": "Report",
+      "status": "Archived",
+      "updatedAt": "2026-02-10T21:00:00Z",
+      "history": [
+        { "phase": "Plan", "action": "Initiated v4 for refactoring and visualization", "timestamp": "2026-02-10T18:15:00Z" },
+        { "phase": "Do", "action": "Extracted BuildingAnalysisService and implemented ScoreBreakdownChart", "timestamp": "2026-02-10T18:25:00Z" },
+        { "phase": "Iterate", "action": "Fixed critical address parsing error (bcode mapping) and hardened API robustness", "timestamp": "2026-02-10T18:50:00Z" },
+        { "phase": "Report", "action": "Generated final completion report including QA results", "timestamp": "2026-02-10T19:00:00Z" },
+        { "phase": "Archive", "action": "Archived documents to docs/05-archive", "timestamp": "2026-02-10T21:00:00Z" }
+      ]
+    },
+    "system-reconstruction": {
+      "phase": "Report",
+      "status": "Archived",
+      "updatedAt": "2026-02-10T21:00:00Z",
+      "history": [
+        { "phase": "Plan", "action": "Redefined Schema and Terminology for full system recovery", "timestamp": "2026-02-10T19:30:00Z" },
+        { "phase": "Design", "action": "Created System Reconstruction and UI/UX Restoration design doc", "timestamp": "2026-02-10T19:35:00Z" },
+        { "phase": "Do", "action": "Restored Expert Engine and 'The Black Table' design to all core components", "timestamp": "2026-02-10T19:40:00Z" },
+        { "phase": "Iterate", "action": "Final alignment of QuotationModal and ReportView with financial charts", "timestamp": "2026-02-10T20:45:00Z" },
+        { "phase": "Report", "action": "Generated final completion report for system reconstruction v2", "timestamp": "2026-02-10T20:50:00Z" },
+        { "phase": "Archive", "action": "Archived documents to docs/05-archive", "timestamp": "2026-02-10T21:00:00Z" }
+      ]
+    },
+    "bulk-unit-quotation-v2": {
+      "phase": "Design",
+      "status": "Archived",
+      "updatedAt": "2026-02-10T21:00:00Z",
+      "history": [
+        { "phase": "Plan", "action": "Defined plan for dynamic bulk unit selection and comparison", "timestamp": "2026-02-10T20:15:00Z" },
+        { "phase": "Design", "action": "Created detailed design for dynamic UI and financial comparison", "timestamp": "2026-02-10T20:30:00Z" },
+        { "phase": "Archive", "action": "Archived documents to docs/05-archive", "timestamp": "2026-02-10T21:00:00Z" }
       ]
     }
   }

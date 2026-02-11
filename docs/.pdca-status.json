@@ -1,10 +1,8 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-02-09T11:36:00.000Z",
-  "activeFeatures": [
-    "real-price-integration"
-  ],
-  "primaryFeature": "real-price-integration",
+  "lastUpdated": "2026-02-11T13:10:00.000Z",
+  "activeFeatures": [],
+  "primaryFeature": "building-report-pro-v2",
   "features": {
     "building-report": {
       "status": "archived",
@@ -35,6 +33,12 @@
       "phase": "report",
       "startedAt": "2026-02-09T16:00:00.000Z",
       "updatedAt": "2026-02-10T02:10:00.000Z"
+    },
+    "building-report-pro-v2": {
+      "status": "completed",
+      "phase": "report",
+      "startedAt": "2026-02-11T12:53:00.000Z",
+      "updatedAt": "2026-02-11T13:10:00.000Z"
     }
   },
   "pipeline": {
@@ -43,25 +47,21 @@
     "phaseHistory": [
       {
         "phase": 1,
-        "completedAt": "2026-02-07T19:30:20.788Z"
+        "completedAt": "2026-02-11T12:53:00.000Z"
       },
       {
         "phase": 2,
-        "completedAt": "2026-02-08T04:50:00.000Z"
+        "completedAt": "2026-02-11T12:54:00.000Z"
       },
       {
-        "phase": 3,
-        "completedAt": "2026-02-08T05:15:00.000Z"
-      },
-      {
-        "phase": 4,
-        "completedAt": "2026-02-08T05:35:00.000Z"
+        "phase": 9,
+        "completedAt": "2026-02-11T13:10:00.000Z"
       }
     ]
   },
   "session": {
-    "startedAt": "2026-02-10T17:12:47.979Z",
+    "startedAt": "2026-02-11T12:52:43.404Z",
     "onboardingCompleted": true,
-    "lastActivity": "2026-02-10T17:12:47.979Z"
+    "lastActivity": "2026-02-11T13:10:00.000Z"
   }
 }

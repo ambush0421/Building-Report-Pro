@@ -2,31 +2,93 @@ export const runtime = 'edge';
 import { NextRequest, NextResponse } from 'next/server';
 import { logger } from '@/lib/logger';
 
-// 단순 메모리 캐시 (서버 재시작 전까지 유지)
-const geoCache = new Map<string, { lat: number; lng: number; source: string }>();
-
 const KAKAO_REST_KEY = process.env.KAKAO_REST_API_KEY;
-// 브이월드 키 (환경변수 권장, 없으면 기존 하드코딩 키 사용)
-const VWORLD_KEY = process.env.VWORLD_API_KEY || '9E8E6CEB-3D63-3761-B9B8-9E52D4F0DC89';
+const VWORLD_API_KEY = process.env.VWORLD_API_KEY || '9E8E6CEB-3D63-3761-B9B8-9E52D4F0DC89';
+
+async function fetchKakaoAddress(lng: string, lat: string) {
+  const response = await fetch(
+    `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lng}&y=${lat}&input_coord=WGS84`,
+    { headers: { 'Authorization': `KakaoAK ${KAKAO_REST_KEY}` } }
+  );
+  if (!response.ok) return null;
+  const data = await response.json();
+  if (data.documents && data.documents.length > 0) {
+    const doc = data.documents[0];
+    const road = doc.road_address;
+    const land = doc.address;
+
+    if (land && land.region_1depth_name && land.region_2depth_name && land.region_3depth_name && land.mountain_yn && land.main_address_no && land.sub_address_no) {
+      return {
+        sigunguCode: land.region_2depth_name,
+        bjdongCode: land.region_3depth_h_name, // 행정동 기준
+        bun: land.main_address_no.padStart(4, '0'),
+        ji: land.sub_address_no.padStart(4, '0')
+      };
+    } else if (road && road.region_1depth_name && road.region_2depth_name && road.region_3depth_name && road.main_building_no && road.sub_building_no) {
+        return {
+            sigunguCode: road.region_2depth_name,
+            bjdongCode: road.region_3depth_name, 
+            bun: road.main_building_no.padStart(4, '0'),
+            ji: road.sub_building_no.padStart(4, '0')
+        };
+    }
+  }
+  return null;
+}
+
+async function fetchVWorldAddress(lng: string, lat: string) {
+  const response = await fetch(
+    `https://api.vworld.kr/req/address?service=address&request=getCoord2Address&version=2.0&crs=epsg:4326&x=${lng}&y=${lat}&type=BOTH&format=json&key=${VWORLD_API_KEY}`
+  );
+  if (!response.ok) return null;
+  const data = await response.json();
+  if (data.response?.status === 'OK' && data.response.result.length > 0) {
+    const item = data.response.result[0].structure;
+    return {
+        sigunguCode: item.level2,
+        bjdongCode: item.level4H, // 행정동 기준
+        bun: item.main_address_no.padStart(4, '0'),
+        ji: item.sub_address_no.padStart(4, '0')
+    }
+  }
+  return null;
+}
 
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
+    const lat = searchParams.get('lat');
+    const lng = searchParams.get('lng');
+
+    if (lat && lng) {
+        try {
+            let addressInfo = null;
+            if (KAKAO_REST_KEY) {
+                addressInfo = await fetchKakaoAddress(lng, lat);
+            }
+            if (!addressInfo) {
+                addressInfo = await fetchVWorldAddress(lng, lat);
+            }
+
+            if (addressInfo) {
+                return NextResponse.json({ success: true, address: addressInfo });
+            } else {
+                return NextResponse.json({ success: false, error: '주소 정보를 찾을 수 없습니다.' }, { status: 404 });
+            }
+        } catch (error: any) {
+            logger.error({ event: 'api.geocode.reverse.error', message: error.message });
+            return NextResponse.json({ success: false, error: '좌표를 주소로 변환하는 중 오류 발생' }, { status: 500 });
+        }
+    }
+    
     const address = (searchParams.get('address') || '').trim();
 
     if (!address) {
-        return NextResponse.json({ error: '주소가 필요합니다.' }, { status: 400 });
-    }
-
-    // 1. 캐시 확인
-    if (geoCache.has(address)) {
-        logger.info({ event: 'api.geocode.cache_hit', address });
-        return NextResponse.json({ success: true, ...geoCache.get(address) });
+        return NextResponse.json({ error: '주소 또는 좌표가 필요합니다.' }, { status: 400 });
     }
 
     try {
         logger.info({ event: 'api.geocode.request', address });
 
-        // 2. 카카오 로컬 API (가장 정확)
         if (KAKAO_REST_KEY) {
             const kakaoRes = await fetch(
                 `https://dapi.kakao.com/v2/local/search/address.json?query=${encodeURIComponent(address)}`,
@@ -36,60 +98,34 @@ export async function GET(request: NextRequest) {
             if (kakaoRes.ok) {
                 const data = await kakaoRes.json();
                 if (data.documents && data.documents.length > 0) {
-                    const result = {
+                    return NextResponse.json({ 
+                        success: true, 
                         lat: parseFloat(data.documents[0].y),
                         lng: parseFloat(data.documents[0].x),
                         source: 'kakao'
-                    };
-                    geoCache.set(address, result);
-                    return NextResponse.json({ success: true, ...result });
+                    });
                 }
             }
         }
 
-        // 3. 브이월드 (국가 공간정보 오픈플랫폼)
         const vworldRes = await fetch(
-            `https://api.vworld.kr/req/address?service=address&request=getcoord&version=2.0&crs=epsg:4326&address=${encodeURIComponent(address)}&format=json&type=ROAD&key=${VWORLD_KEY}`
+            `https://api.vworld.kr/req/address?service=address&request=getcoord&version=2.0&crs=epsg:4326&address=${encodeURIComponent(address)}&format=json&type=ROAD&key=${VWORLD_API_KEY}`
         );
 
         if (vworldRes.ok) {
             const data = await vworldRes.json();
             if (data.response?.status === 'OK' && data.response?.result?.point) {
-                const result = {
+                return NextResponse.json({ 
+                    success: true, 
                     lat: parseFloat(data.response.result.point.y),
                     lng: parseFloat(data.response.result.point.x),
-                    source: 'vworld'
-                };
-                geoCache.set(address, result);
-                return NextResponse.json({ success: true, ...result });
+                    source: 'vworld' 
+                });
             }
         }
 
-        // 4. Nominatim (OpenStreetMap 기반 - 최후의 수단)
-        const osmRes = await fetch(
-            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&countrycodes=kr&limit=1`,
-            { headers: { 'User-Agent': 'BuildingReportPro/1.0' } }
-        );
-
-        if (osmRes.ok) {
-            const data = await osmRes.json();
-            if (data && data.length > 0) {
-                const result = {
-                    lat: parseFloat(data[0].lat),
-                    lng: parseFloat(data[0].lon),
-                    source: 'osm'
-                };
-                geoCache.set(address, result);
-                return NextResponse.json({ success: true, ...result });
-            }
-        }
-
-        // 5. 모두 실패 시 기본값 (서울시청)
         return NextResponse.json({
             success: false,
-            lat: 37.566826,
-            lng: 126.9786567,
-            source: 'fallback',
             message: '주소를 찾을 수 없어 기본 위치를 반환합니다.'
         });
 
@@ -97,8 +133,6 @@ export async function GET(request: NextRequest) {
         logger.error({ event: 'api.geocode.error', message: error.message });
         return NextResponse.json({
             success: false,
-            lat: 37.566826,
-            lng: 126.9786567,
             error: '좌표 변환 중 오류 발생'
         }, { status: 500 });
     }

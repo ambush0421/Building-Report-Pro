@@ -2,7 +2,8 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
-import { Trophy, TrendingDown, TrendingUp, AlertTriangle, MapPin, Calendar, Car, Maximize } from 'lucide-react';
+import { Trophy, TrendingDown, TrendingUp, AlertTriangle, MapPin, Calendar, Car, Maximize, BarChart3 } from 'lucide-react';
+import ScoreBreakdownChart from "@/components/charts/ScoreBreakdownChart";
 
 interface MobileComparisonCardProps {
   building: any;
@@ -57,6 +58,15 @@ export function MobileComparisonCard({ building, index, isBest }: MobileComparis
               <span className="text-[10px] text-slate-400">({building.metrics.area.toFixed(0)}㎡)</span>
             </div>
           </div>
+        </div>
+
+        {/* 분석 스코어링 섹션 (신규 추가) */}
+        <div className="p-6 border-b border-slate-50">
+          <div className="flex items-center gap-2 mb-4">
+            <BarChart3 className="w-4 h-4 text-slate-400" />
+            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-tight">항목별 분석 스코어</span>
+          </div>
+          <ScoreBreakdownChart breakdown={building.analysis.breakdown} />
         </div>
 
         {/* 상세 스펙 섹션 */}

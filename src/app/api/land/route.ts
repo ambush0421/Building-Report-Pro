@@ -1,56 +1,52 @@
-import { NextResponse } from 'next/server';
-import axios from 'axios';
+import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 export const runtime = 'edge';
 
-const API_URL = 'http://apis.data.go.kr/1613000/LndpSvc/getLndpInfo';
+const API_URL = 'https://apis.data.go.kr/1613000/LndpSvc/getLndpInfo';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const sigunguCd = searchParams.get('sigunguCd');
   const bjdongCd = searchParams.get('bjdongCd');
   const bun = searchParams.get('bun');
   const ji = searchParams.get('ji');
 
-  const apiKey = process.env.DATA_API_KEY;
-
-  if (!apiKey) {
-    return NextResponse.json({
-      success: true,
-      data: {
-        lndpclAr: 500.5,
-        lndMsclCdNm: "대",
-        pannPrc: 4500000
-      }
-    });
-  }
+  const apiKey = process.env.BUILDING_API_KEY || process.env.DATA_API_KEY || 'OjpqanOc0ZOlfUfzfWWFeZle0K%2FsCsE6VZm8C%2FKn0DeZShHh%2FvddaJwRAzj0MMYSuYUA%3D%3D';
 
   try {
-    const response = await axios.get(API_URL, {
-      params: {
-        serviceKey: apiKey,
-        sigunguCd,
-        bjdongCd,
-        bun,
-        ji,
-        _type: 'json',
-      },
-    });
+    const queryParams = new URLSearchParams({
+      serviceKey: decodeURIComponent(apiKey),
+      sigunguCd: sigunguCd || '',
+      bjdongCd: bjdongCd || '',
+      bun: (bun || '0').padStart(4, '0'),
+      ji: (ji || '0').padStart(4, '0'),
+      _type: 'json',
+    }).toString();
 
-    const item = response.data?.response?.body?.items?.item;
+    const response = await fetch(`${API_URL}?${queryParams}`);
+    const rawData = await response.text();
+
+    if (rawData.includes('<CM700001>')) {
+      return NextResponse.json({ success: false, error: '토지 API 인증 오류' }, { status: 401 });
+    }
+
+    const data = JSON.parse(rawData);
+    const item = data.response?.body?.items?.item;
     if (!item) return NextResponse.json({ success: false, error: '토지 정보를 찾을 수 없습니다.' }, { status: 404 });
 
-    const data = Array.isArray(item) ? item[0] : item;
+    const b = Array.isArray(item) ? item[0] : item;
 
     return NextResponse.json({
       success: true,
       data: {
-        lndpclAr: Number(data.lndpclAr),
-        lndMsclCdNm: data.lndMsclCdNm,
-        pannPrc: Number(data.pannPrc),
+        lndpclAr: Number(b.lndpclAr || 0),
+        lndMsclCdNm: b.lndMsclCdNm,
+        pannPrc: Number(b.pannPrc || 0),
       }
     });
-  } catch (error) {
+  } catch (error: any) {
+    logger.error({ event: 'api.land.error', message: error.message });
     return NextResponse.json({ success: false, error: '토지 API 호출 오류' }, { status: 500 });
   }
 }
