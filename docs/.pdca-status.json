@@ -1,9 +1,15 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-02-11T13:10:00.000Z",
+  "lastUpdated": "2026-02-14T00:30:00.000Z",
   "activeFeatures": [],
   "primaryFeature": "building-report-pro-v2",
   "features": {
+    "system-stabilization": {
+      "status": "completed",
+      "phase": "report",
+      "startedAt": "2026-02-14T00:15:00.000Z",
+      "updatedAt": "2026-02-14T00:30:00.000Z"
+    },
     "building-report": {
       "status": "archived",
       "phase": "report",
@@ -60,8 +66,8 @@
     ]
   },
   "session": {
-    "startedAt": "2026-02-11T12:52:43.404Z",
+    "startedAt": "2026-02-14T00:17:38.073Z",
     "onboardingCompleted": true,
-    "lastActivity": "2026-02-11T13:10:00.000Z"
+    "lastActivity": "2026-02-14T00:17:38.073Z"
   }
 }

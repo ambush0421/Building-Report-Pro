@@ -27,11 +27,10 @@ const NumberInput: React.FC<NumberInputProps> = ({
   const [inputValue, setInputValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
 
-  useEffect(() => {
-    if (!isFocused) {
-      setInputValue(value === 0 ? "" : formatNumber(value));
-    }
-  }, [value, isFocused]);
+  // 현재 입력값 결정: 포커스 중일 때는 내부 입력값, 아닐 때는 포맷팅된 value
+  const displayValue = isFocused 
+    ? inputValue 
+    : (value === 0 ? "" : formatNumber(value));
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value;
@@ -45,14 +44,11 @@ const NumberInput: React.FC<NumberInputProps> = ({
 
   const handleBlur = () => {
     setIsFocused(false);
-    setInputValue(value === 0 ? "" : formatNumber(value));
   };
 
   const handleFocus = () => {
     setIsFocused(true);
-    if (value !== 0) {
-      setInputValue(value.toString()); // 포커스 시 콤마 제거
-    }
+    setInputValue(value === 0 ? "" : value.toString()); // 포커스 시 콤마 제거
   };
 
   return (
@@ -61,7 +57,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
       <div className="relative flex items-center">
         <Input
           type="text"
-          value={inputValue}
+          value={displayValue}
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}

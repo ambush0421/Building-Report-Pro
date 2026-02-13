@@ -16,13 +16,19 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({ lines = 4, showTitle = true
         </CardHeader>
       )}
       <CardContent className="space-y-4">
-        {Array.from({ length: lines }).map((_, i) => (
-          <Skeleton 
-            key={i} 
-            className="h-4" 
-            style={{ width: `${Math.floor(Math.random() * 40) + 60}%` }} 
-          />
-        ))}
+        {Array.from({ length: lines }).map((_, i) => {
+          // 인덱스 기반의 고정된 너비 패턴 사용 (순수성 유지)
+          const widths = ['85%', '92%', '78%', '88%', '95%'];
+          const width = widths[i % widths.length];
+          
+          return (
+            <Skeleton 
+              key={i} 
+              className="h-4" 
+              style={{ width }} 
+            />
+          );
+        })}
       </CardContent>
     </Card>
   );
