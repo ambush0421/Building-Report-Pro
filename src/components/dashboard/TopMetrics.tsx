@@ -6,7 +6,27 @@ import {
   Layers, Maximize, Calendar, Car, ArrowUpCircle
 } from "lucide-react";
 
-export function TopMetrics({ data }: { data: any }) {
+export interface TopMetricsData {
+  ugrndFlrCnt?: number;
+  grndFlrCnt?: number;
+  hhldCnt?: number;
+  hoCnt?: number;
+  totArea?: number;
+  useAprDay?: string;
+  indrMechUtcnt?: number;
+  indrAutoUtcnt?: number;
+  oudrMechUtcnt?: number;
+  oudrAutoUtcnt?: number;
+  rideUseElvtCnt?: number;
+  emgenUseElvtCnt?: number;
+  bcRat?: number;
+  vlRat?: number;
+  mainPurpsCdNm?: string;
+  strctCdNm?: string;
+  vlrtBldRgstYn?: string;
+}
+
+export function TopMetrics({ data }: { data: TopMetricsData | any }) {
   if (!data) return null;
 
   // 연차 계산

@@ -10,6 +10,7 @@ import { MarketChart } from './dashboard/MarketChart';
 
 interface ReportViewProps {
   data: any;
+  readOnly?: boolean;
 }
 
 // Helper to calculate building age
@@ -57,11 +58,11 @@ const ReportView: React.FC<ReportViewProps> = ({ data }) => {
     if (data.vlrtBldRgstYn === 'Y') {
       return "본 자산은 공적 장부상 위반 사항이 존재하여 매입/임차 시 행정적 리스크가 매우 높습니다. 이행강제금 및 용도변경 제한 사항을 필히 검토하십시오.";
     }
-    
+
     if (type === 'PURCHASE') {
       return `본 물건은 법적 제한 사항이 없으며, 연면적 및 건폐율이 효율적으로 관리되고 있습니다. 사옥 매입 시 기업의 고정 자산 가치 상승 및 실무 공간 확보 측면에서 우량한 선택지로 판단됩니다.`;
     }
-    
+
     if (type === 'INVEST') {
       return "지목 및 공시지가 추이가 안정적이며, 자산 건전성이 확보된 물건입니다. 인근 시세와 연동된 임대 수익 구조 최적화 시 타겟 수익률 달성이 충분히 가능할 것으로 분석됩니다.";
     }
@@ -87,7 +88,7 @@ const ReportView: React.FC<ReportViewProps> = ({ data }) => {
       {/* Header */}
       <div className="border-b-4 border-black pb-6 mb-8 flex justify-between items-start">
         <div className="space-y-1">
-           <span className="bg-gray-800 text-white text-[10px] font-black px-2 py-0.5 rounded-sm uppercase tracking-tighter">{type}</span>
+          <span className="bg-gray-800 text-white text-[10px] font-black px-2 py-0.5 rounded-sm uppercase tracking-tighter">{type}</span>
           <h1 className="text-4xl font-black tracking-tighter uppercase italic">{config.mainTitle}</h1>
           <h2 className="text-xl font-bold text-gray-900">{config.subTitle}</h2>
         </div>
@@ -105,8 +106,8 @@ const ReportView: React.FC<ReportViewProps> = ({ data }) => {
       <section className="mb-10">
         <div className="grid grid-cols-4 gap-0 border border-black divide-x divide-black">
           <SummaryMetric label="연면적" value={`${(data.totArea * 0.3025).toFixed(1)}`} unit="평" />
-          <SummaryMetric 
-            label="공시지가 (m²)" 
+          <SummaryMetric
+            label="공시지가 (m²)"
             value={data.landInfo?.pannPrc ? `${formatPrice(data.landInfo.pannPrc)}` : '-'}
             unit="원"
           />
@@ -133,7 +134,7 @@ const ReportView: React.FC<ReportViewProps> = ({ data }) => {
           <h2 className="text-2xl font-black uppercase tracking-tight">{config.section1}</h2>
           <span className="text-gray-400 text-sm font-medium ml-auto">{config.section1Sub}</span>
         </div>
-        
+
         <div className="grid grid-cols-2 gap-x-12 gap-y-6">
           <InfoRow label="건물명 (PROPERTY NAME)" value={data.bldNm || 'N/A'} />
           <InfoRow label="대지위치 (LOCATION)" value={data.platAddr} />
@@ -192,7 +193,7 @@ const ReportView: React.FC<ReportViewProps> = ({ data }) => {
                 <LineChart data={data.priceHistory}>
                   <CartesianGrid strokeDasharray="2 2" vertical={false} stroke="#eee" />
                   <XAxis dataKey="year" fontSize={10} tickLine={false} axisLine={false} />
-                  <Tooltip 
+                  <Tooltip
                     contentStyle={{ backgroundColor: '#000', color: '#fff', border: 'none', fontSize: '10px' }}
                     itemStyle={{ color: '#fff' }}
                     formatter={(value: any) => [`${formatPrice(Number(value))}원/m²`, "공시지가"]}
@@ -224,7 +225,7 @@ const ReportView: React.FC<ReportViewProps> = ({ data }) => {
 
       {/* Section 06: Financial Simulation placeholder */}
       {!data.analysis?.financialSimulation && (
-         <section className="mb-12 page-break-inside-avoid">
+        <section className="mb-12 page-break-inside-avoid">
           <div className="flex items-center gap-3 mb-6 border-b-2 border-black pb-2">
             <Calculator className="h-6 w-6" />
             <h2 className="text-2xl font-black uppercase tracking-tight">06. FINANCIAL SIMULATION</h2>
@@ -244,17 +245,17 @@ const ReportView: React.FC<ReportViewProps> = ({ data }) => {
             <h2 className="text-2xl font-black uppercase tracking-tight">06. FINANCIAL SIMULATION</h2>
             <span className="text-gray-400 text-sm font-medium ml-auto">재무 타당성 분석 (추정)</span>
           </div>
-          
+
           <div className="grid grid-cols-2 gap-8">
             <div className="border-2 border-black p-6">
               <div className="flex items-center justify-between mb-4 border-b border-black pb-2">
                 <h3 className="text-sm font-black uppercase tracking-widest">Initial Investment</h3>
                 <PieChart className="w-4 h-4 text-gray-400" />
               </div>
-              <InitialCostChart 
-                equity={data.analysis.financialSimulation.initial.equity} 
-                loan={data.analysis.financialSimulation.initial.loanAmount} 
-                tax={data.analysis.financialSimulation.initial.acquisitionTax} 
+              <InitialCostChart
+                equity={data.analysis.financialSimulation.initial.equity}
+                loan={data.analysis.financialSimulation.initial.loanAmount}
+                tax={data.analysis.financialSimulation.initial.acquisitionTax}
               />
               <div className="flex justify-between items-center pt-4 border-t border-dashed border-gray-300 mt-2">
                 <span className="text-xs font-black text-black uppercase">Required Equity</span>
@@ -267,10 +268,10 @@ const ReportView: React.FC<ReportViewProps> = ({ data }) => {
                 <h3 className="text-sm font-black uppercase tracking-widest">Cash Flow Analysis</h3>
                 <BarChart3 className="w-4 h-4 text-gray-400" />
               </div>
-              <CashFlowChart 
-                grossIncome={data.analysis.financialSimulation.monthly.grossIncome} 
-                interest={data.analysis.financialSimulation.monthly.interest} 
-                netIncome={data.analysis.financialSimulation.monthly.cashFlow} 
+              <CashFlowChart
+                grossIncome={data.analysis.financialSimulation.monthly.grossIncome}
+                interest={data.analysis.financialSimulation.monthly.interest}
+                netIncome={data.analysis.financialSimulation.monthly.cashFlow}
               />
               <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t-2 border-black">
                 <div className="text-center">
