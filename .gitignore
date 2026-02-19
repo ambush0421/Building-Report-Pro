@@ -41,6 +41,12 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# tool-specific
+.bkit-codex/
+.codex/
+tsc-errors.txt
+
+
 # test results
 qa-results-*.json
 api_response.json

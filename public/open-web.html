@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>웹 페이지 바로 열기</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        background: linear-gradient(180deg, #eef4ff 0%, #f8fafc 100%);
+        color: #0f172a;
+      }
+      .card {
+        width: min(560px, calc(100vw - 32px));
+        background: #ffffff;
+        border: 1px solid #dbeafe;
+        border-radius: 18px;
+        padding: 28px;
+        box-shadow: 0 20px 45px -30px rgba(15, 23, 42, 0.45);
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: 1.5rem;
+      }
+      p {
+        margin: 0 0 18px;
+        color: #475569;
+      }
+      .actions {
+        display: grid;
+        gap: 10px;
+      }
+      a {
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        padding: 12px 14px;
+        border-radius: 12px;
+        font-weight: 700;
+      }
+      .primary {
+        background: #2563eb;
+        color: #ffffff;
+      }
+      .secondary {
+        border: 1px solid #cbd5e1;
+        color: #1e293b;
+        background: #f8fafc;
+      }
+      .meta {
+        margin-top: 14px;
+        font-size: 0.85rem;
+        color: #64748b;
+      }
+      code {
+        background: #f1f5f9;
+        border-radius: 6px;
+        padding: 2px 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>웹 페이지 바로 열기</h1>
+      <p>아래 버튼을 클릭하면 프로젝트 화면으로 이동합니다.</p>
+      <div class="actions">
+        <a class="primary" href="/">메인 페이지 열기</a>
+        <a class="secondary" href="/dashboard">대시보드 열기</a>
+      </div>
+      <div class="meta">
+        현재 기준: <code id="origin"></code>
+      </div>
+    </main>
+    <script>
+      document.getElementById("origin").textContent = window.location.origin;
+    </script>
+  </body>
+</html>
