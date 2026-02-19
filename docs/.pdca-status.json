@@ -1,8 +1,8 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-02-14T00:30:00.000Z",
+  "lastUpdated": "2026-02-19T01:59:00.000Z",
   "activeFeatures": [],
-  "primaryFeature": "building-report-pro-v2",
+  "primaryFeature": "seo-valueup",
   "features": {
     "system-stabilization": {
       "status": "completed",
@@ -45,6 +45,12 @@
       "phase": "report",
       "startedAt": "2026-02-11T12:53:00.000Z",
       "updatedAt": "2026-02-11T13:10:00.000Z"
+    },
+    "seo-valueup": {
+      "status": "completed",
+      "phase": "report",
+      "startedAt": "2026-02-19T01:20:00.000Z",
+      "updatedAt": "2026-02-19T01:59:00.000Z"
     }
   },
   "pipeline": {
@@ -62,12 +68,16 @@
       {
         "phase": 9,
         "completedAt": "2026-02-11T13:10:00.000Z"
+      },
+      {
+        "phase": 9,
+        "completedAt": "2026-02-19T01:59:00.000Z"
       }
     ]
   },
   "session": {
     "startedAt": "2026-02-14T00:17:38.073Z",
     "onboardingCompleted": true,
-    "lastActivity": "2026-02-14T00:17:38.073Z"
+    "lastActivity": "2026-02-19T01:59:00.000Z"
   }
 }

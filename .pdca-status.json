@@ -135,6 +135,17 @@
         { "phase": "Design", "action": "Created detailed design for dynamic UI and financial comparison", "timestamp": "2026-02-10T20:30:00Z" },
         { "phase": "Archive", "action": "Archived documents to docs/05-archive", "timestamp": "2026-02-10T21:00:00Z" }
       ]
+    },
+    "seo-valueup": {
+      "phase": "Report",
+      "status": "Pending",
+      "updatedAt": "2026-02-19T01:59:00Z",
+      "history": [
+        { "phase": "Plan", "action": "Created SEO value-up plan document", "timestamp": "2026-02-19T01:20:00Z" },
+        { "phase": "Design", "action": "Created SEO value-up design document", "timestamp": "2026-02-19T01:25:00Z" },
+        { "phase": "Do", "action": "Applied robots host normalization and validation runs", "timestamp": "2026-02-19T01:45:00Z" },
+        { "phase": "Report", "action": "Generated SEO value-up completion report", "timestamp": "2026-02-19T01:59:00Z" }
+      ]
     }
   }
 }
