@@ -4,7 +4,16 @@ import { ArrowLeft, Building2, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: '서비스 소개',
-  description: 'BuildingReportPro 소개 페이지',
+  description: 'BuildingReportPro 서비스 소개 페이지',
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    title: '서비스 소개 | BuildingReportPro',
+    description: 'BuildingReportPro 서비스 소개 페이지',
+    url: 'https://building-report.pro/about',
+    type: 'article',
+  },
 };
 
 export default function AboutPage() {

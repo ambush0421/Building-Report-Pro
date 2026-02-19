@@ -5,6 +5,15 @@ import { FileText, ArrowLeft } from 'lucide-react';
 export const metadata: Metadata = {
     title: '이용약관',
     description: 'Building Report Pro 이용약관. 서비스 이용 조건, 이용자의 권리와 의무, 면책사항 등을 안내합니다.',
+    alternates: {
+        canonical: '/terms',
+    },
+    openGraph: {
+        title: '이용약관 | BuildingReportPro',
+        description: 'Building Report Pro 이용약관 안내',
+        url: 'https://building-report.pro/terms',
+        type: 'article',
+    },
 };
 
 export default function TermsPage() {

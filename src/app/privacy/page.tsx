@@ -5,6 +5,15 @@ import { Shield, ArrowLeft } from 'lucide-react';
 export const metadata: Metadata = {
     title: '개인정보처리방침',
     description: 'Building Report Pro 개인정보처리방침. 수집하는 개인정보 항목, 이용 목적, 보관 기간 및 파기 절차에 대해 안내합니다.',
+    alternates: {
+        canonical: '/privacy',
+    },
+    openGraph: {
+        title: '개인정보처리방침 | BuildingReportPro',
+        description: 'Building Report Pro 개인정보처리방침 안내',
+        url: 'https://building-report.pro/privacy',
+        type: 'article',
+    },
 };
 
 export default function PrivacyPage() {

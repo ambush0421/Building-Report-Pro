@@ -5,6 +5,15 @@ import { ArrowLeft } from 'lucide-react';
 export const metadata: Metadata = {
   title: '이용 가이드',
   description: 'BuildingReportPro 이용 방법 안내',
+  alternates: {
+    canonical: '/guide',
+  },
+  openGraph: {
+    title: '이용 가이드 | BuildingReportPro',
+    description: 'BuildingReportPro 이용 방법 안내',
+    url: 'https://building-report.pro/guide',
+    type: 'article',
+  },
 };
 
 export default function GuidePage() {

@@ -23,6 +23,10 @@ export async function generateMetadata({ params }: SharePageProps): Promise<Meta
     return {
       title: '공유 리포트를 불러올 수 없음',
       description: getSupabaseConfigError() || 'Supabase 설정이 필요합니다.',
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
@@ -38,6 +42,10 @@ export async function generateMetadata({ params }: SharePageProps): Promise<Meta
     return {
       title: '보고서를 찾을 수 없습니다',
       description: '요청한 공유 보고서가 존재하지 않거나 접근할 수 없습니다.',
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
@@ -47,9 +55,15 @@ export async function generateMetadata({ params }: SharePageProps): Promise<Meta
   return {
     title: `${buildingName} 투자 분석 보고서`,
     description: `주소: ${address} | BuildingReportPro 공유 리포트`,
+    robots: {
+      index: false,
+      follow: false,
+      nocache: true,
+    },
     openGraph: {
       title: `${buildingName} 투자 분석 보고서`,
       description: `${address} 분석 결과를 확인하세요.`,
+      url: `https://building-report.pro/share/${id}`,
       type: 'website',
     },
   };
